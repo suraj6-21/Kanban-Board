@@ -1,65 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Kanban Board</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <main>
-        <nav>
-            <div class="left">
-                Kanban Board
-            </div>
+      <nav>
+        <div class="left">Kanban Board</div>
 
-            <div class="right">
-                <button id="toggle-modal">Add new Task</button>
-            </div>
-        </nav>
+        <div class="right">
+          <button id="toggle-modal">Add new Task</button>
+        </div>
+      </nav>
 
-        <section class="Board">
-            <div id="todo" class="task-colm">
-                <div class="heading">
-                    <div class="left">To Do</div>
-                    <div class="right">Count</div>
-                </div>
+      <section class="Board">
+        <div id="todo" class="task-colm">
+          <div class="heading">
+            <div class="left">To Do</div>
+            <div class="right">Count</div>
+          </div>
 
-                <div draggable="true" class="task">
-                    <h2>Task 1</h2>
-                    <p>Decription of task 1</p>
-                    <button>Delete</button>
-                </div>
-            </div>
+          <!-- <div draggable="true" class="task">
+            <h2>Task 1</h2>
+            <p>Decription of task 1</p>
+            <button>Delete</button>
+          </div> -->
+        </div>
 
-            <div id="progress" class="task-colm">
-                <div class="heading">
-                    <div class="left">In Progress</div>
-                    <div class="right">Count</div>
-                </div>
-            </div>
+        <div id="progress" class="task-colm">
+          <div class="heading">
+            <div class="left">In Progress</div>
+            <div class="right">Count</div>
+          </div>
+        </div>
 
-            <div id="done" class="task-colm ">
-                <div class="heading">
-                    <div class="left">Done</div>
-                    <div class="right">Count</div>
-                </div>
-            </div>
-        </section>
+        <div id="done" class="task-colm">
+          <div class="heading">
+            <div class="left">Done</div>
+            <div class="right">Count</div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <div class="modal  add-new-task">
-        <div class="bg"></div>
-        <div class="center">
-            <input type="text" placeholder="Task Title">
-            <textarea name="" placeholder="Title Decription"></textarea>
-            <button id="add-new-task" class="add-new-btn">Add Task</button>
-        </div>
+    <div class="modal add-new-task">
+      <div class="bg"></div>
+      <div class="center">
+        <input type="text" id="task-title-input" placeholder="Task Title" />
+        <textarea
+          id="task-desc-input"
+          placeholder="Title Decription"
+        ></textarea>
+        
+        <button id="add-new-task" class="add-new-btn">Add Task</button>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
