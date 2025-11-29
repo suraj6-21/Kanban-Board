@@ -57,9 +57,12 @@ main {
 }
 
 nav {
-    padding: var(--nav-padding);
     display: flex;
     align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color);
+    padding: var(--nav-padding);
     justify-content: space-between;
 }
 
