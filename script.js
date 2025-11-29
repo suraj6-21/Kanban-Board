@@ -1,9 +1,65 @@
 const todo = document.querySelector("#todo")
 const progress = document.querySelector("#progress")
 const done = document.querySelector("#done")
-let drageElement = null
-
 const tasks = document.querySelectorAll(".task")
+const toggleModelButton = document.querySelector("#toggle-modal")
+const modalBg = document.querySelector(".modal .bg")
+const modal = document.querySelector(".modal")
+const addtaskButton = document.querySelector("#add-new-task")
+let drageElement = null
+let tasksData = {}
+const colums = [todo, progress, done]
+
+
+function addTask(title, desc, column) {
+    const div = document.createElement("div")
+    div.classList.add("task")
+    div.setAttribute("draggable", "true")
+
+    div.innerHTML = `
+        <h2>${title}</h2>
+        <p>${desc}</p>
+        <button>Delete</button>
+        `
+    column.appendChild(div)
+
+    div.addEventListener("drag", (e) => {
+        drageElement = div
+    })
+    return div
+}
+
+function updateTaskCount() {
+    colums.forEach(col => {
+        const tasks = col.querySelectorAll(".task")
+        const count = col.querySelector(".right")
+
+        tasksData[col.id] = Array.from(tasks).map(t => {
+            return {
+                title: t.querySelector("h2").innerText,
+                desc: t.querySelector("p").innerText
+            }
+        })
+
+        localStorage.setItem("tasks", JSON.stringify(tasksData))
+        count.innerText = tasks.length
+    })
+}
+
+
+if (localStorage.getItem("tasks")) {
+    const data = JSON.parse(localStorage.getItem("tasks"))
+
+    for (const col in data) {
+        const colums = document.querySelector(`#${col}`)
+
+        data[col].forEach(task => {
+            addTask(task.title, task.desc, colums)
+        })
+    }
+    updateTaskCount()
+}
+
 
 tasks.forEach(task => {
     task.addEventListener("drag", (e) => {
@@ -28,13 +84,33 @@ function addDraheEventOnColm(colm) {
 
     colm.addEventListener("drop", (e) => {
         e.preventDefault();
-        colm.appendChild(drageElement);   // fixed spelling
+
+        colm.appendChild(drageElement);
         colm.classList.remove("hover-over");
+        updateTaskCount()
     });
-    
 }
 
 addDraheEventOnColm(todo);
 addDraheEventOnColm(progress);
 addDraheEventOnColm(done);
 
+
+
+toggleModelButton.addEventListener("click", (e) => {
+    modal.classList.toggle("active")
+})
+
+modalBg.addEventListener("click", (e) => {
+    modal.classList.remove("active")
+})
+
+addtaskButton.addEventListener("click", (e) => {
+    const taskTitle = document.querySelector("#task-title-input").value
+    const taskDesc = document.querySelector("#task-desc-input").value
+
+    addTask(taskTitle, taskDesc, todo)
+    updateTaskCount()
+
+    modal.classList.remove("active")
+})
