@@ -84,6 +84,7 @@ section {
 section .task-colm {
     display: flex;
     flex-grow: 1;
+    width: 100%;
     gap: var(--padding-m);
     flex-direction: column;
     padding: var(--padding-m);
